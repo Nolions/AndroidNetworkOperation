@@ -10,24 +10,15 @@ object Repository {
         apiService = Provider(baseApi).createService(Service::class.java)
     }
 
-    suspend fun get(foo: String? = null): Resp<GetResp> {
-        val result = apiService?.get(foo)
+    suspend fun get(foo: String? = null) = response(apiService?.get(foo))
 
-        return Resp(
-            isSuccess = result?.isSuccessful,
-            code = result?.code(),
-            message = result?.message(),
-            data = result?.body() as GetResp
-        )
-    }
+    suspend fun delete(foo: String? = null) = response(apiService?.delete(foo))
 
-    suspend fun delete(foo: String? = null): Resp<GetResp> {
-        val result = apiService?.delete(foo)
+    suspend fun put(foo: String? = null) = response(apiService?.put(foo))
 
-        return response(result)
-    }
+    suspend fun post(foo: String? = null) = response(apiService?.post(foo))
 
-    private fun <T>response(result: Response<T>?):Resp<GetResp> {
+    private fun <T> response(result: Response<T>?): Resp<GetResp> {
         return Resp(
             isSuccess = result?.isSuccessful,
             code = result?.code(),
