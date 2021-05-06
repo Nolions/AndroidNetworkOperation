@@ -1,5 +1,6 @@
 package tw.nolions.networkoperation
 
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -15,4 +16,7 @@ interface Service {
 
     @POST("/post")
     suspend fun post(@Query("foo") foo: String? = null): Response<GetResp>
+
+    @POST("/post")
+    suspend fun postJson(@Body body: RequestBody): Response<GetResp>
 }

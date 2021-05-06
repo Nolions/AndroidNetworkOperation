@@ -2,7 +2,7 @@ package tw.nolions.networkoperation
 
 import com.google.gson.annotations.SerializedName
 
-class GetResp(val args: HashMap<String, String>, val headers: Header, val origin: String, val url: String) {
+data class GetResp(val args: HashMap<String, String>, val headers: Header, val origin: String, val url: String) {
     class Header(
         @SerializedName("Accept") val accept: String,
         @SerializedName("Accept-Encoding") val acceptEncoding: String,
@@ -18,7 +18,7 @@ class GetResp(val args: HashMap<String, String>, val headers: Header, val origin
     )
 }
 
-class Resp<T>(
+data class Resp<T>(
     val isSuccess: Boolean? = false,
     val code: Int? = 0,
     val message: String? = null,

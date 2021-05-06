@@ -1,5 +1,8 @@
 package tw.nolions.networkoperation
 
+import com.google.gson.Gson
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Response
 
 object Repository {
@@ -18,6 +21,12 @@ object Repository {
 
     suspend fun post(foo: String? = null) = response(apiService?.post(foo))
 
+    suspend fun postJson(msg: Message) = response(
+        apiService?.postJson(
+            Gson().toJson(msg).toRequestBody("application/json; charset=utf-8".toMediaType())
+        )
+    )
+
     private fun <T> response(result: Response<T>?): Resp<GetResp> {
         return Resp(
             isSuccess = result?.isSuccessful,
@@ -26,4 +35,10 @@ object Repository {
             data = result?.body() as GetResp
         )
     }
+}
+
+data class Message(
+    val title: String,
+    val msg: String
+) {
 }
