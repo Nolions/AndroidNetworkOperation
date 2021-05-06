@@ -7,11 +7,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 class Provider(api: String) {
     private val retrofit = Retrofit.Builder()
         .baseUrl(api)
-        .client(getHttpClient())
+        .client(createHttpClient())
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    private fun getHttpClient(): OkHttpClient {
+    private fun createHttpClient(): OkHttpClient {
         val httpClient = OkHttpClient.Builder()
             .followRedirects(false)
             .followSslRedirects(false)
