@@ -1,5 +1,6 @@
 package tw.nolions.networkoperation
 
+import android.content.Context
 import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -9,8 +10,8 @@ object Repository {
 
     private var apiService: Service? = null
 
-    fun baseAPI(baseApi: String) {
-        apiService = Provider(baseApi).createService(Service::class.java)
+    fun baseAPI(baseApi: String, context: Context) {
+        apiService = Provider(baseApi, context).createService(Service::class.java)
     }
 
     suspend fun get(foo: String? = null) = response(apiService?.get(foo))

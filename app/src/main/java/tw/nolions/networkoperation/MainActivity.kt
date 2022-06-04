@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Repository.baseAPI("https://httpbin.org")
+        Repository.baseAPI("https://httpbin.org", this)
 
         setUI()
     }
